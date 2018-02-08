@@ -1,0 +1,4996 @@
+[spec "m0_implicitContext" = 
+    sorts 
+	"CS_TopLevel_STATES"
+	"HDSystem_STATES"
+    ops "STANDBY" : "CS_TopLevel_STATES"
+	"PREPARATION" : "CS_TopLevel_STATES"
+	"INITIATION" : "CS_TopLevel_STATES"
+	"ENDING" : "CS_TopLevel_STATES"
+	"HDSystem_STANDBY" : "HDSystem_STATES"
+	"HDSystem_PREP" : "HDSystem_STATES"
+	"HDSystem_INIT" : "HDSystem_STATES"
+	"HDSystem_END" : "HDSystem_STATES"
+	
+    preds
+	" partition(CS_TopLevel_STATES, {STANDBY}, {PREPARATION}, {INITIATION}, {ENDING})"
+	" partition(HDSystem_STATES, {HDSystem_STANDBY}, {HDSystem_PREP}, {HDSystem_INIT}, {HDSystem_END})"
+ end 
+,spec "c8-rinsing_parameters" = 
+    sorts 
+    ops "FILLING_BP_RATE_RANGE" : "50\8229\&600"
+	"RINSING_BP_RATE_RANGE" : "50\8229\&300"
+	"DF_FLOW_RANGE" : "50\8229\&300"
+	"RINSING_TIME_RANGE" : "0\8229\&59"
+	"UF_RINSING_RATE_RANGE" : "0\8229\&3000"
+	"UF_RINSING_VOLUME_RANGE" : "0\8229\&2950"
+	"BLOOD_FLOW_RANGE" : "50\8229\&600"
+	
+    preds
+	"FILLING_BP_RATE_RANGE \8800 \8709"
+	"FILLING_BP_VOLUME_RANGE \8800 \8709"
+	"RINSING_BP_RATE_RANGE \8800 \8709"
+	"DF_FLOW_RANGE \8800 \8709"
+	"RINSING_TIME_RANGE \8800 \8709"
+	"UF_RINSING_RATE_RANGE \8800 \8709"
+	"UF_RINSING_VOLUME_RANGE \8800 \8709"
+	"BLOOD_FLOW_RANGE \8800 \8709"
+ end 
+,spec "c7-concentrates" = 
+    sorts 
+	"CONCENTRATE"
+    ops 
+    preds
+	"partition(CONCENTRATE, {CONCENTRATE_NONE}, {CONCENTRATE_BICARBONATE}, {CONCENTRATE_ACETATE})"
+ end 
+,spec "c5-signals" = 
+    sorts 
+	"SIGNAL_STATUS"
+	"SIGNAL"
+    ops 
+    preds
+	"partition(SIGNAL_STATUS, {SIGNAL_OFF}, {SIGNAL_RED}, {SIGNAL_GREEN}, {SIGNAL_ORANGE})"
+ end 
+,spec "m1_implicitContext" = 
+"m0_implicitContext"    sorts 
+	"PREPARATION_sm_STATES"
+	"INITIATION_sm_STATES"
+	"ENDING_sm_STATES"
+	"HDSystem_PREP_sm_STATES"
+	"HDSystem_INIT_sm_STATES"
+	"HDSystem_END_sm_STATES"
+    ops "PREPARATION_sm_NULL" : "PREPARATION_sm_STATES"
+	"CF_TESTING" : "PREPARATION_sm_STATES"
+	"CONCENTRATE_CONNECTING" : "PREPARATION_sm_STATES"
+	"RP_SETTING" : "PREPARATION_sm_STATES"
+	"TS_PREPARING" : "PREPARATION_sm_STATES"
+	"HP_PREPARING" : "PREPARATION_sm_STATES"
+	"TP_SETTING" : "PREPARATION_sm_STATES"
+	"DIALYZER_RINSING" : "PREPARATION_sm_STATES"
+	"INITIATION_sm_NULL" : "INITIATION_sm_STATES"
+	"PATIENT_CONNECTING" : "INITIATION_sm_STATES"
+	"THERAPY" : "INITIATION_sm_STATES"
+	"ENDING_sm_NULL" : "ENDING_sm_STATES"
+	"REINFUSION" : "ENDING_sm_STATES"
+	"DIALYZER_EMPTYING" : "ENDING_sm_STATES"
+	"CARTRIDGE_EMPTYING" : "ENDING_sm_STATES"
+	"THERAPY_OVERVIEWING" : "ENDING_sm_STATES"
+	"HDSystem_PREP_sm_NULL" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_Testing" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_ConnectingConcentrate" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_SettingRinsingParameters" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_PreparingTubingSystem" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_PreparingHP" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_SettingTreatmentParameters" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_RinsingDialyzer" : "HDSystem_PREP_sm_STATES"
+	"HDSystem_INIT_sm_NULL" : "HDSystem_INIT_sm_STATES"
+	"HDSystem_ConnectingPatient" : "HDSystem_INIT_sm_STATES"
+	"HDSystem_Therapy" : "HDSystem_INIT_sm_STATES"
+	"HDSystem_END_sm_NULL" : "HDSystem_END_sm_STATES"
+	"HDSystem_Reinfusion" : "HDSystem_END_sm_STATES"
+	"HDSystem_EmptyingDialyzer" : "HDSystem_END_sm_STATES"
+	"HDSystem_EmptyingCartridge" : "HDSystem_END_sm_STATES"
+	"HDSystem_DisplayingOverview" : "HDSystem_END_sm_STATES"
+	
+    preds
+	" partition(PREPARATION_sm_STATES, {CF_TESTING}, {CONCENTRATE_CONNECTING}, {RP_SETTING}, {TS_PREPARING}, {HP_PREPARING}, {TP_SETTING}, {DIALYZER_RINSING}, {PREPARATION_sm_NULL})"
+	" partition(INITIATION_sm_STATES, {PATIENT_CONNECTING}, {THERAPY}, {INITIATION_sm_NULL})"
+	" partition(ENDING_sm_STATES, {REINFUSION}, {DIALYZER_EMPTYING}, {CARTRIDGE_EMPTYING}, {THERAPY_OVERVIEWING}, {ENDING_sm_NULL})"
+	" partition(HDSystem_PREP_sm_STATES, {HDSystem_Testing}, {HDSystem_ConnectingConcentrate}, {HDSystem_SettingRinsingParameters}, {HDSystem_PreparingTubingSystem}, {HDSystem_PreparingHP}, {HDSystem_SettingTreatmentParameters}, {HDSystem_RinsingDialyzer}, {HDSystem_PREP_sm_NULL})"
+	" partition(HDSystem_INIT_sm_STATES, {HDSystem_ConnectingPatient}, {HDSystem_Therapy}, {HDSystem_INIT_sm_NULL})"
+	" partition(HDSystem_END_sm_STATES, {HDSystem_Reinfusion}, {HDSystem_EmptyingDialyzer}, {HDSystem_EmptyingCartridge}, {HDSystem_DisplayingOverview}, {HDSystem_END_sm_NULL})"
+ end 
+,spec "m2_implicitContext" = 
+"m1_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m3_implicitContext" = 
+"m2_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m4_implicitContext" = 
+"m3_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m5_implicitContext" = 
+"m4_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m6_implicitContext" = 
+"m5_implicitContext"    sorts 
+	"CF_TESTING_sm_STATES"
+    ops "CF_TESTING_sm_NULL" : "CF_TESTING_sm_STATES"
+	"CF_TESTING_SIGNAL_OFF" : "CF_TESTING_sm_STATES"
+	"CF_TESTING_SIGNAL_GREEN" : "CF_TESTING_sm_STATES"
+	"CF_TESTING_SIGNAL_RED" : "CF_TESTING_sm_STATES"
+	
+    preds
+	" partition(CF_TESTING_sm_STATES, {CF_TESTING_SIGNAL_OFF}, {CF_TESTING_SIGNAL_GREEN}, {CF_TESTING_SIGNAL_RED}, {CF_TESTING_sm_NULL})"
+ end 
+,spec "m7_implicitContext" = 
+"m6_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m8_implicitContext" = 
+"m7_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m9_implicitContext" = 
+"m8_implicitContext"    sorts 
+	"CS_TopLevel_PatientConnecting_STATES"
+    ops "CS_TopLevel_PatientConnecting_NULL" : "CS_TopLevel_PatientConnecting_STATES"
+	"PatientConnecting_ARTERIALLY_CONNECTING" : "CS_TopLevel_PatientConnecting_STATES"
+	"PatientConnecting_BF_INITIATING" : "CS_TopLevel_PatientConnecting_STATES"
+	"PatientConnecting_VENOUSLY_CONNECTING" : "CS_TopLevel_PatientConnecting_STATES"
+	"PatientConnecting_BP_RESTARTING" : "CS_TopLevel_PatientConnecting_STATES"
+	"PatientConnecting_BypassModeLeaving" : "CS_TopLevel_PatientConnecting_STATES"
+	
+    preds
+	" partition(CS_TopLevel_PatientConnecting_STATES, {PatientConnecting_ARTERIALLY_CONNECTING}, {PatientConnecting_BF_INITIATING}, {PatientConnecting_VENOUSLY_CONNECTING}, {PatientConnecting_BP_RESTARTING}, {PatientConnecting_BypassModeLeaving}, {CS_TopLevel_PatientConnecting_NULL})"
+ end 
+,spec "m910_implicitContext" = 
+"m9_implicitContext"    sorts 
+	"PATIENT_CONNECTIONS_STATES"
+    ops "PATIENT_DISCONNECTED" : "PATIENT_CONNECTIONS_STATES"
+	"PATIENT_ARTERIALLY_CONNECTED" : "PATIENT_CONNECTIONS_STATES"
+	"PATIENT_BOTH_CONNECTED" : "PATIENT_CONNECTIONS_STATES"
+	"PATIENT_VENOUSLY_CONNECTED" : "PATIENT_CONNECTIONS_STATES"
+	
+    preds
+	" partition(PATIENT_CONNECTIONS_STATES, {PATIENT_DISCONNECTED}, {PATIENT_ARTERIALLY_CONNECTED}, {PATIENT_BOTH_CONNECTED}, {PATIENT_VENOUSLY_CONNECTED})"
+ end 
+,spec "m910_correct_inv_implicitContext" = 
+"m910_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec "m911_implicitContext" = 
+"m910_correct_inv_implicitContext"    sorts 
+	"CS_LowLevel_Overall_STATES"
+    ops "NORMAL" : "CS_LowLevel_Overall_STATES"
+	"ABNORMAL" : "CS_LowLevel_Overall_STATES"
+	
+    preds
+	" partition(CS_LowLevel_Overall_STATES, {NORMAL}, {ABNORMAL})"
+ end 
+,spec "m912_implicitContext" = 
+"m911_implicitContext"    sorts 
+	"CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"CS_LowLevel_Reinfusion_VP_Status_STATES"
+    ops "CS_TopLevel_PatientConnecting_VP_Status_NULL" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"PatientConnecting_VP_NORMAL" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"PatientConnecting_VP_LOW" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"PatientConnecting_VP_HIGH" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"CS_TopLevel_PatientConnecting_AP_Status_NULL" : "CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"PatientConnecting_AP_NORMAL" : "CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"PatientConnecting_AP_LOW" : "CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"CS_LowLevel_Reinfusion_VP_Status_NULL" : "CS_LowLevel_Reinfusion_VP_Status_STATES"
+	"Reinfusion_VP_NORMAL" : "CS_LowLevel_Reinfusion_VP_Status_STATES"
+	"Reinfusion_VP_HIGH" : "CS_LowLevel_Reinfusion_VP_Status_STATES"
+	
+    preds
+	" partition(CS_TopLevel_PatientConnecting_VP_Status_STATES, {PatientConnecting_VP_NORMAL}, {PatientConnecting_VP_LOW}, {PatientConnecting_VP_HIGH}, {CS_TopLevel_PatientConnecting_VP_Status_NULL})"
+	" partition(CS_TopLevel_PatientConnecting_AP_Status_STATES, {PatientConnecting_AP_NORMAL}, {PatientConnecting_AP_LOW}, {CS_TopLevel_PatientConnecting_AP_Status_NULL})"
+	" partition(CS_LowLevel_Reinfusion_VP_Status_STATES, {Reinfusion_VP_NORMAL}, {Reinfusion_VP_HIGH}, {CS_LowLevel_Reinfusion_VP_Status_NULL})"
+ end 
+,spec "m913_implicitContext" = 
+"m912_implicitContext"    sorts 
+	"CS_LowLevel_Therapy_BP_Control_STATES"
+	"RUNNING_statemachine1_STATES"
+	"CS_LowLevel_Initiation_BP_Stop_STATES"
+	"CS_LowLevel_Therapy_BP_Status_STATES"
+    ops "CS_LowLevel_Therapy_BP_Control_NULL" : "CS_LowLevel_Therapy_BP_Control_STATES"
+	"RUNNING" : "CS_LowLevel_Therapy_BP_Control_STATES"
+	"RUNNING_statemachine1_NULL" : "RUNNING_statemachine1_STATES"
+	"S1" : "RUNNING_statemachine1_STATES"
+	"S2" : "RUNNING_statemachine1_STATES"
+	"S3" : "RUNNING_statemachine1_STATES"
+	"S4" : "RUNNING_statemachine1_STATES"
+	"S5" : "RUNNING_statemachine1_STATES"
+	"PAUSE" : "CS_LowLevel_Therapy_BP_Control_STATES"
+	"CS_LowLevel_Initiation_BP_Stop_NULL" : "CS_LowLevel_Initiation_BP_Stop_STATES"
+	"CS_LowLevel_Initiation_BP_Stop_NORMAL" : "CS_LowLevel_Initiation_BP_Stop_STATES"
+	"CS_LowLevel_Initiation_BP_Stop_STOP" : "CS_LowLevel_Initiation_BP_Stop_STATES"
+	"CS_LowLevel_Therapy_BP_Status_NULL" : "CS_LowLevel_Therapy_BP_Status_STATES"
+	"CS_LowLevel_Therapy_BP_NORMAL" : "CS_LowLevel_Therapy_BP_Status_STATES"
+	"CS_LowLevel_Therapy_BP_STOPPED" : "CS_LowLevel_Therapy_BP_Status_STATES"
+	
+    preds
+	" partition(CS_LowLevel_Therapy_BP_Control_STATES, {RUNNING}, {PAUSE}, {CS_LowLevel_Therapy_BP_Control_NULL})"
+	" partition(RUNNING_statemachine1_STATES, {S1}, {S2}, {S3}, {S4}, {S5}, {RUNNING_statemachine1_NULL})"
+	" partition(CS_LowLevel_Initiation_BP_Stop_STATES, {CS_LowLevel_Initiation_BP_Stop_NORMAL}, {CS_LowLevel_Initiation_BP_Stop_STOP}, {CS_LowLevel_Initiation_BP_Stop_NULL})"
+	" partition(CS_LowLevel_Therapy_BP_Status_STATES, {CS_LowLevel_Therapy_BP_NORMAL}, {CS_LowLevel_Therapy_BP_STOPPED}, {CS_LowLevel_Therapy_BP_Status_NULL})"
+ end 
+,spec "m914_implicitContext" = 
+"m913_implicitContext"    sorts 
+	"ARTERIAL_BOLUS_STATES"
+	"PAUSE_statemachine1_STATES"
+    ops "ARTERIAL_BOLUS_NULL" : "ARTERIAL_BOLUS_STATES"
+	"ARTERIAL_BOLUS_OFF" : "ARTERIAL_BOLUS_STATES"
+	"ARTERIAL_BOLUS_ON" : "ARTERIAL_BOLUS_STATES"
+	"PAUSE_statemachine1_NULL" : "PAUSE_statemachine1_STATES"
+	"AB_START" : "PAUSE_statemachine1_STATES"
+	"AB_RUNNING" : "PAUSE_statemachine1_STATES"
+	"AB_FINISH" : "PAUSE_statemachine1_STATES"
+	
+    preds
+	" partition(ARTERIAL_BOLUS_STATES, {ARTERIAL_BOLUS_OFF}, {ARTERIAL_BOLUS_ON}, {ARTERIAL_BOLUS_NULL})"
+	" partition(PAUSE_statemachine1_STATES, {AB_START}, {AB_RUNNING}, {AB_FINISH}, {PAUSE_statemachine1_NULL})"
+ end 
+,spec "m915_implicitContext" = 
+"m914_implicitContext"    sorts 
+    ops 
+    preds
+ end 
+,spec m0 = 
+ m0_implicitContext
+ then 
+   ops "CS_TopLevel" : "CS_TopLevel_STATES"
+	"CS_TopLevel" : "CS_TopLevel_STATES"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_TopLevel' = STANDBY"
+	
+   Event "HDSystem_Prepares" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = STANDBY"
+	 with 
+	 thenAct "CS_TopLevel' = PREPARATION"
+
+   Event "HDSystem_Initiates" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = PREPARATION"
+	 with 
+	 thenAct "CS_TopLevel' = INITIATION"
+
+   Event "HDSystem_Ends" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = INITIATION"
+	 with 
+	 thenAct "CS_TopLevel' = ENDING"
+
+   Event "HDSystem_StandsBy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = ENDING"
+	 with 
+	 thenAct "CS_TopLevel' = STANDBY"
+
+
+ end 
+,spec m1 = 
+m0 and 
+ m1_implicitContext
+ then 
+   ops "PREPARATION_sm" : "PREPARATION_sm_STATES"
+	"INITIATION_sm" : "INITIATION_sm_STATES"
+	"ENDING_sm" : "ENDING_sm_STATES"
+	"PREPARATION_sm" : "PREPARATION_sm_STATES"
+	"INITIATION_sm" : "INITIATION_sm_STATES"
+	"ENDING_sm" : "ENDING_sm_STATES"
+	
+   predsÿ
+	"PREPARATION_sm \8800 PREPARATION_sm_NULL \8660 CS_TopLevel = PREPARATION&PREPARATION_sm' \8800 PREPARATION_sm'_NULL \8660 CS_TopLevel' = PREPARATION"
+	"INITIATION_sm \8800 INITIATION_sm_NULL \8660 CS_TopLevel = INITIATION&INITIATION_sm' \8800 INITIATION_sm'_NULL \8660 CS_TopLevel' = INITIATION"
+	"ENDING_sm \8800 ENDING_sm_NULL \8660 CS_TopLevel = ENDING&ENDING_sm' \8800 ENDING_sm'_NULL \8660 CS_TopLevel' = ENDING"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "PREPARATION_sm' = PREPARATION_sm_NULL"
+	"INITIATION_sm' = INITIATION_sm_NULL"
+	"ENDING_sm' = ENDING_sm_NULL"
+	
+   Event "HDSystem_StartsTestingCF" Ordinary = 
+ 	 refines "HDSystem_Prepares"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "PREPARATION_sm' = CF_TESTING"
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_Initiates"
+ 	 any 
+	 where "PREPARATION_sm = DIALYZER_RINSING"
+	 with 
+	 thenAct "PREPARATION_sm' = PREPARATION_sm_NULL""INITIATION_sm' = PATIENT_CONNECTING"
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_Ends"
+ 	 any 
+	 where "INITIATION_sm = THERAPY"
+	 with 
+	 thenAct "INITIATION_sm' = INITIATION_sm_NULL""ENDING_sm' = REINFUSION"
+
+   Event "HDSystem_StartsStandingBy" Ordinary = 
+ 	 refines "HDSystem_StandsBy"
+ 	 any 
+	 where "ENDING_sm = THERAPY_OVERVIEWING"
+	 with 
+	 thenAct "ENDING_sm' = ENDING_sm_NULL"
+
+   Event "HDSystem_StartsConnectingConcentrate" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = CF_TESTING"
+	 with 
+	 thenAct "PREPARATION_sm' = CONCENTRATE_CONNECTING"
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = CONCENTRATE_CONNECTING"
+	 with 
+	 thenAct "PREPARATION_sm' = RP_SETTING"
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = RP_SETTING"
+	 with 
+	 thenAct "PREPARATION_sm' = TS_PREPARING"
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = TS_PREPARING"
+	 with 
+	 thenAct "PREPARATION_sm' = HP_PREPARING"
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = HP_PREPARING"
+	 with 
+	 thenAct "PREPARATION_sm' = TP_SETTING"
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = TP_SETTING"
+	 with 
+	 thenAct "PREPARATION_sm' = DIALYZER_RINSING"
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "INITIATION_sm = PATIENT_CONNECTING"
+	 with 
+	 thenAct "INITIATION_sm' = THERAPY"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENDING_sm = REINFUSION"
+	 with 
+	 thenAct "ENDING_sm' = DIALYZER_EMPTYING"
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENDING_sm = DIALYZER_EMPTYING"
+	 with 
+	 thenAct "ENDING_sm' = CARTRIDGE_EMPTYING"
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENDING_sm = CARTRIDGE_EMPTYING"
+	 with 
+	 thenAct "ENDING_sm' = THERAPY_OVERVIEWING"
+
+
+ end 
+,spec m2 = 
+m1 and 
+ m2_implicitContext
+ then 
+   ops "CS_LL_CF_NOT_TESTED" : "BOOL"
+	"CS_LL_CF_TESTING" : "BOOL"
+	"CS_LL_CF_TESTED_OK" : "BOOL"
+	"CS_LL_CF_TESTED_KO" : "BOOL"
+	"CS_LL_CF_NOT_TESTED" : "BOOL"
+	"CS_LL_CF_TESTING" : "BOOL"
+	"CS_LL_CF_TESTED_OK" : "BOOL"
+	"CS_LL_CF_TESTED_KO" : "BOOL"
+	
+   predsÿ
+	"partition({TRUE}, {CS_LL_CF_NOT_TESTED} \8745 {TRUE}, {CS_LL_CF_TESTING} \8745 {TRUE}, {CS_LL_CF_TESTED_OK} \8745 {TRUE}, {CS_LL_CF_TESTED_KO} \8745 {TRUE})&partition({TRUE}, {CS_LL_CF_NOT_TESTED'} \8745 {TRUE}, {CS_LL_CF_TESTING'} \8745 {TRUE}, {CS_LL_CF_TESTED_OK'} \8745 {TRUE}, {CS_LL_CF_TESTED_KO'} \8745 {TRUE})"
+	"(CS_TopLevel = PREPARATION) \8658 (PREPARATION_sm \8800 CF_TESTING \8658 CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = PREPARATION) \8658 (PREPARATION_sm' \8800 CF_TESTING \8658 CS_LL_CF_TESTED_OK' = TRUE)"
+	"(CS_TopLevel = INITIATION) \8658 (CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = INITIATION) \8658 (CS_LL_CF_TESTED_OK' = TRUE)"
+	"(CS_TopLevel = ENDING) \8658 (CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = ENDING) \8658 (CS_LL_CF_TESTED_OK' = TRUE)"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_LL_CF_NOT_TESTED' = TRUE"
+	"CS_LL_CF_TESTING' = FALSE"
+	"CS_LL_CF_TESTED_OK' = FALSE"
+	"CS_LL_CF_TESTED_KO' = FALSE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "HDSystem_StartsTestingCF"
+ 	 any 
+	 where "CS_LL_CF_NOT_TESTED = TRUE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "HDSystem_StartsStandingBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingConcentrate"
+ 	 any 
+	 where "CS_LL_CF_TESTED_OK = TRUE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = CF_TESTING""CS_LL_CF_NOT_TESTED = TRUE"
+	 with 
+	 thenAct "CS_LL_CF_NOT_TESTED' = FALSE""CS_LL_CF_TESTING' = TRUE"
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = STANDBY""CS_LL_CF_TESTED_OK = TRUE"
+	 with 
+	 thenAct "CS_LL_CF_TESTED_OK' = FALSE""CS_LL_CF_NOT_TESTED' = TRUE"
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LL_CF_TESTING = TRUE"
+	 with 
+	 thenAct "CS_LL_CF_TESTING' = FALSE""CS_LL_CF_TESTED_OK' = TRUE"
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LL_CF_TESTING = TRUE"
+	 with 
+	 thenAct "CS_LL_CF_TESTING' = FALSE""CS_LL_CF_TESTED_KO' = TRUE"
+
+
+ end 
+,spec m3 = 
+m2 and 
+ m3_implicitContext
+ then 
+   ops "HDMachine_CFTestedOK" : "BOOL"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "HDMachine_CFTestedOK :\8712 BOOL"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where "HDMachine_CFTestedOK = TRUE"
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where "HDMachine_CFTestedOK = FALSE"
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LL_CF_TESTING = TRUE"
+	 with 
+	 thenAct "HDMachine_CFTestedOK :\8712 BOOL"
+
+
+ end 
+,spec m4 = 
+m3 and 
+ m4_implicitContext
+ then 
+   ops 
+   predsÿ
+	"(CS_LL_CF_NOT_TESTED = TRUE) \8658 (HD_2_CS_CFTestingFinished = FALSE)&(CS_LL_CF_NOT_TESTED' = TRUE) \8658 (HD_2_CS_CFTestingFinished' = FALSE)"
+	"(CS_LL_CF_TESTED_OK = TRUE) \8658 (HD_2_CS_CFTestingFinished = FALSE)&(CS_LL_CF_TESTED_OK' = TRUE) \8658 (HD_2_CS_CFTestingFinished' = FALSE)"
+	"(CS_LL_CF_TESTED_KO = TRUE) \8658 (HD_2_CS_CFTestingFinished = FALSE)&(CS_LL_CF_TESTED_KO' = TRUE) \8658 (HD_2_CS_CFTestingFinished' = FALSE)"
+	"CS_2_HD_StartsCFTesting = TRUE \8658 CS_LL_CF_TESTING = TRUE&CS_2_HD_StartsCFTesting' = TRUE \8658 CS_LL_CF_TESTING' = TRUE"
+	"HD_2_CS_CFTestingFinished = TRUE \8658 CS_2_HD_StartsCFTesting = FALSE&HD_2_CS_CFTestingFinished' = TRUE \8658 CS_2_HD_StartsCFTesting' = FALSE"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_2_HD_StartsCFTesting' = FALSE"
+	"HD_2_CS_CFTestingFinished' = FALSE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "CS_2_HD_StartsCFTesting' = TRUE"
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where "HD_2_CS_CFTestingFinished = TRUE"
+	 with 
+	 thenAct "HD_2_CS_CFTestingFinished' = FALSE"
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where "HD_2_CS_CFTestingFinished = TRUE"
+	 with 
+	 thenAct "HD_2_CS_CFTestingFinished' = FALSE"
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where "CS_2_HD_StartsCFTesting = TRUE"
+	 with 
+	 thenAct "HDMachine_CFTestedOK :\8712 BOOL""CS_2_HD_StartsCFTesting' = FALSE""HD_2_CS_CFTestingFinished' = TRUE"
+
+
+ end 
+,spec m5 = 
+m4 and 
+ m5_implicitContext and "c5-signals"
+ then 
+   ops "signal_status" : "SIGNAL \8594 SIGNAL_STATUS"
+	
+   predsÿ
+	"(CS_TopLevel = STANDBY) \8658 (signal_status = SIGNAL \215 {SIGNAL_OFF})&(CS_TopLevel' = STANDBY) \8658 (signal_status' = SIGNAL \215 {SIGNAL_OFF})"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "signal_status' = SIGNAL \215 {SIGNAL_OFF}"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "signal_status' = SIGNAL \215 {SIGNAL_OFF}"
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "sgn \8712 SIGNAL""CS_TopLevel \8800 STANDBY"
+	 with 
+	 thenAct "signal_status(sgn)' = SIGNAL_GREEN"
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "sgn \8712 SIGNAL""CS_TopLevel \8800 STANDBY"
+	 with 
+	 thenAct "signal_status(sgn)' = SIGNAL_RED"
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "sgn \8712 SIGNAL""CS_TopLevel \8800 STANDBY"
+	 with 
+	 thenAct "signal_status(sgn)' = SIGNAL_ORANGE"
+
+
+ end 
+,spec m6 = 
+m5 and 
+ m6_implicitContext and "c6-CFTestingSignal"
+ then 
+   ops "CF_TESTING_sm" : "CF_TESTING_sm_STATES"
+	"CF_TESTING_sm" : "CF_TESTING_sm_STATES"
+	
+   predsÿ
+	"CF_TESTING_sm \8800 CF_TESTING_sm_NULL \8660 PREPARATION_sm = CF_TESTING&CF_TESTING_sm' \8800 CF_TESTING_sm'_NULL \8660 PREPARATION_sm' = CF_TESTING"
+	"(CF_TESTING_sm = CF_TESTING_SIGNAL_GREEN) \8658 (signal_status(CF_TESTING_SIGNAL) = SIGNAL_GREEN)&(CF_TESTING_sm' = CF_TESTING_SIGNAL_GREEN) \8658 (signal_status'(CF_TESTING_SIGNAL) = SIGNAL_GREEN)"
+	"(CF_TESTING_sm = CF_TESTING_SIGNAL_RED) \8658 (signal_status(CF_TESTING_SIGNAL) = SIGNAL_RED)&(CF_TESTING_sm' = CF_TESTING_SIGNAL_RED) \8658 (signal_status'(CF_TESTING_SIGNAL) = SIGNAL_RED)"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_sm_NULL"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_SIGNAL_OFF"
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_sm_NULL"
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where "CF_TESTING_sm = CF_TESTING_SIGNAL_GREEN"
+	 with 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_sm_NULL"
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "signal_status' = SIGNAL \215 {SIGNAL_OFF}"
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where "CS_LL_CF_TESTED_OK = TRUE""CF_TESTING_sm = CF_TESTING_SIGNAL_OFF""sgn = CF_TESTING_SIGNAL"
+	 with 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_SIGNAL_GREEN"
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where "CS_LL_CF_TESTED_KO = TRUE""CF_TESTING_sm = CF_TESTING_SIGNAL_OFF""sgn = CF_TESTING_SIGNAL"
+	 with 
+	 thenAct "CF_TESTING_sm' = CF_TESTING_SIGNAL_RED"
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where "sgn \8800 CF_TESTING_SIGNAL"
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where "sgn \8800 CF_TESTING_SIGNAL"
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where "sgn \8800 CF_TESTING_SIGNAL"
+	 with 
+	 thenAct 
+
+
+ end 
+,spec m7 = 
+m6 and 
+ m7_implicitContext and "c6-CFTestingSignal" and "c7-concentrates"
+ then 
+   ops "connected_concentrate" : "CONCENTRATE"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "connected_concentrate' = CONCENTRATE_NONE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where "connected_concentrate = CONCENTRATE_NONE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where "connected_concentrate \8800 CONCENTRATE_NONE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = CONCENTRATE_CONNECTING""connected_concentrate = CONCENTRATE_NONE"
+	 with 
+	 thenAct "connected_concentrate :\8712 {CONCENTRATE_BICARBONATE, CONCENTRATE_ACETATE}"
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel = STANDBY""connected_concentrate \8800 CONCENTRATE_NONE"
+	 with 
+	 thenAct "connected_concentrate' = CONCENTRATE_NONE"
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+
+ end 
+,spec m8 = 
+m7 and 
+ m8_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters"
+ then 
+   ops "fillingBPRate" : "FILLING_BP_RATE_RANGE"
+	"fillingBPVolume" : "FILLING_BP_VOLUME_RANGE"
+	"rinsingBPRate" : "RINSING_BP_RATE_RANGE"
+	"DFFlow" : "DF_FLOW_RANGE"
+	"UFRinsingRate" : "UF_RINSING_RATE_RANGE"
+	"UFRinsingVolume" : "UF_RINSING_VOLUME_RANGE"
+	"bloodFlow" : "BLOOD_FLOW_RANGE"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "fillingBPRate :\8712 FILLING_BP_RATE_RANGE"
+	"fillingBPVolume :\8712 FILLING_BP_VOLUME_RANGE"
+	"rinsingBPRate :\8712 RINSING_BP_RATE_RANGE"
+	"DFFlow :\8712 DF_FLOW_RANGE"
+	"UFRinsingRate :\8712 UF_RINSING_RATE_RANGE"
+	"UFRinsingVolume :\8712 UF_RINSING_VOLUME_RANGE"
+	"bloodFlow :\8712 BLOOD_FLOW_RANGE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingPatient" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "PREPARATION_sm = RP_SETTING"
+	 with 
+	 thenAct "fillingBPRate :\8712 FILLING_BP_RATE_RANGE""fillingBPVolume :\8712 FILLING_BP_VOLUME_RANGE""rinsingBPRate :\8712 RINSING_BP_RATE_RANGE""DFFlow :\8712 DF_FLOW_RANGE""UFRinsingRate :\8712 UF_RINSING_RATE_RANGE""bloodFlow :\8712 BLOOD_FLOW_RANGE"
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+
+ end 
+,spec m9 = 
+m8 and 
+ m9_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters"
+ then 
+   ops "CS_TopLevel_PatientConnecting" : "CS_TopLevel_PatientConnecting_STATES"
+	"CS_TopLevel_PatientConnecting" : "CS_TopLevel_PatientConnecting_STATES"
+	
+   predsÿ
+	"CS_TopLevel_PatientConnecting \8800 CS_TopLevel_PatientConnecting_NULL \8658 INITIATION_sm = PATIENT_CONNECTING&CS_TopLevel'_PatientConnecting \8800 CS_TopLevel'_PatientConnecting_NULL \8658 INITIATION_sm' = PATIENT_CONNECTING"
+	"INITIATION_sm = PATIENT_CONNECTING \8658 CS_TopLevel_PatientConnecting \8800 CS_TopLevel_PatientConnecting_NULL&INITIATION_sm' = PATIENT_CONNECTING \8658 CS_TopLevel'_PatientConnecting \8800 CS_TopLevel'_PatientConnecting_NULL"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_TopLevel_PatientConnecting' = CS_TopLevel_PatientConnecting_NULL"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingPatient"
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = CS_TopLevel_PatientConnecting_NULL"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = PatientConnecting_ARTERIALLY_CONNECTING"
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_BypassModeLeaving"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = CS_TopLevel_PatientConnecting_NULL"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_ARTERIALLY_CONNECTING"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = PatientConnecting_BF_INITIATING"
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_BF_INITIATING"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = PatientConnecting_VENOUSLY_CONNECTING"
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_VENOUSLY_CONNECTING"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = PatientConnecting_BP_RESTARTING"
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_BP_RESTARTING"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting' = PatientConnecting_BypassModeLeaving"
+
+
+ end 
+,spec m910 = 
+m9 and 
+ m910_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters"
+ then 
+   ops "PATIENT_CONNECTIONS" : "PATIENT_CONNECTIONS_STATES"
+	"PATIENT_CONNECTIONS" : "PATIENT_CONNECTIONS_STATES"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "PATIENT_CONNECTIONS' = PATIENT_DISCONNECTED"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where "PATIENT_CONNECTIONS = PATIENT_DISCONNECTED"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where "PATIENT_CONNECTIONS = PATIENT_ARTERIALLY_CONNECTED"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where "PATIENT_CONNECTIONS = PATIENT_BOTH_CONNECTED"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_ARTERIALLY_CONNECTING""PATIENT_CONNECTIONS = PATIENT_DISCONNECTED"
+	 with 
+	 thenAct "PATIENT_CONNECTIONS' = PATIENT_ARTERIALLY_CONNECTED"
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENDING_sm = REINFUSION""PATIENT_CONNECTIONS = PATIENT_VENOUSLY_CONNECTED"
+	 with 
+	 thenAct "PATIENT_CONNECTIONS' = PATIENT_DISCONNECTED"
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENDING_sm = REINFUSION""PATIENT_CONNECTIONS = PATIENT_BOTH_CONNECTED"
+	 with 
+	 thenAct "PATIENT_CONNECTIONS' = PATIENT_VENOUSLY_CONNECTED"
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting = PatientConnecting_VENOUSLY_CONNECTING""PATIENT_CONNECTIONS = PATIENT_ARTERIALLY_CONNECTED"
+	 with 
+	 thenAct "PATIENT_CONNECTIONS' = PATIENT_BOTH_CONNECTED"
+
+
+ end 
+,spec m910_correct_inv = 
+m910 and 
+ m910_correct_inv_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters"
+ then 
+   ops 
+   predsÿ
+	"(CS_TopLevel = STANDBY) \8658 (PATIENT_CONNECTIONS = PATIENT_DISCONNECTED)&(CS_TopLevel' = STANDBY) \8658 (PATIENT_CONNECTIONS' = PATIENT_DISCONNECTED)"
+	"(CS_TopLevel = PREPARATION) \8658 (PATIENT_CONNECTIONS = PATIENT_DISCONNECTED)&(CS_TopLevel' = PREPARATION) \8658 (PATIENT_CONNECTIONS' = PATIENT_DISCONNECTED)"
+	"(INITIATION_sm = THERAPY) \8658 (PATIENT_CONNECTIONS = PATIENT_BOTH_CONNECTED)&(INITIATION_sm' = THERAPY) \8658 (PATIENT_CONNECTIONS' = PATIENT_BOTH_CONNECTED)"
+	"(CS_TopLevel = ENDING) \8658 (ENDING_sm \8800 REINFUSION \8658 PATIENT_CONNECTIONS = PATIENT_DISCONNECTED)&(CS_TopLevel' = ENDING) \8658 (ENDING_sm' \8800 REINFUSION \8658 PATIENT_CONNECTIONS' = PATIENT_DISCONNECTED)"
+	"(CS_TopLevel_PatientConnecting = PatientConnecting_BP_RESTARTING) \8658 (PATIENT_CONNECTIONS = PATIENT_BOTH_CONNECTED)&(CS_TopLevel'_PatientConnecting = PatientConnecting_BP_RESTARTING) \8658 (PATIENT_CONNECTIONS' = PATIENT_BOTH_CONNECTED)"
+	"(CS_TopLevel_PatientConnecting = PatientConnecting_BypassModeLeaving) \8658 (PATIENT_CONNECTIONS = PATIENT_BOTH_CONNECTED)&(CS_TopLevel'_PatientConnecting = PatientConnecting_BypassModeLeaving) \8658 (PATIENT_CONNECTIONS' = PATIENT_BOTH_CONNECTED)"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct 
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+
+ end 
+,spec m911 = 
+m910_correct_inv and 
+ c6-CFTestingSignal and "c7-concentrates" and "c8-rinsing_parameters" and "c911-pressure_monitors" and "m911_implicitContext"
+ then 
+   ops "CS_LowLevel_Overall" : "CS_LowLevel_Overall_STATES"
+	"CS_LowLevel_Overall" : "CS_LowLevel_Overall_STATES"
+	"pressure" : "PRESSURE_MONITOR \8594 \8484"
+	
+   predsÿ
+	"CS_TopLevel_Alarm = TRUE \8658 CS_LowLevel_Overall = ABNORMAL&CS_TopLevel'_Alarm = TRUE \8658 CS_LowLevel_Overall' = ABNORMAL"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_LowLevel_Overall' = NORMAL"
+	"pressure' = PRESSURE_MONITOR \215 {0}"
+	"CS_TopLevel_Alarm' = FALSE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "PM_SetsPressure" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pm \8712 PRESSURE_MONITOR""prs \8712 \8484"
+	 with 
+	 thenAct "pressure(pm)' = prs"
+
+   Event "CS_LowLevel_Abnormal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_TopLevel_RaisesAlarm" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_TopLevel_Alarm = FALSE""CS_LowLevel_Overall = ABNORMAL"
+	 with 
+	 thenAct "CS_TopLevel_Alarm' = TRUE"
+
+
+ end 
+,spec m912 = 
+m911 and 
+ m912_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters" and "c911-pressure_monitors" and "c912-PM_limits"
+ then 
+   ops "CS_TopLevel_PatientConnecting_VP_Status" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"CS_TopLevel_PatientConnecting_AP_Status" : "CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"CS_LowLevel_Reinfusion_VP_Status" : "CS_LowLevel_Reinfusion_VP_Status_STATES"
+	"CS_LowLevel_Reinfusion_AP_NORMAL" : "BOOL"
+	"CS_LowLevel_Reinfusion_AP_LOW" : "BOOL"
+	"CS_TopLevel_PatientConnecting_VP_Status" : "CS_TopLevel_PatientConnecting_VP_Status_STATES"
+	"CS_TopLevel_PatientConnecting_AP_Status" : "CS_TopLevel_PatientConnecting_AP_Status_STATES"
+	"CS_LowLevel_Reinfusion_VP_Status" : "CS_LowLevel_Reinfusion_VP_Status_STATES"
+	"CS_LowLevel_Reinfusion_AP_NORMAL" : "BOOL"
+	"CS_LowLevel_Reinfusion_AP_LOW" : "BOOL"
+	"limit_window_active" : "PRESSURE_MONITOR \8594 BOOL"
+	"limit_low" : "PRESSURE_MONITOR \8594 \8484"
+	"limit_low" : "PRESSURE_MONITOR \8594 \8484"
+	"limit_high" : "PRESSURE_MONITOR \8594 \8484"
+	"limit_high" : "PRESSURE_MONITOR \8594 \8484"
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = CS_TopLevel_PatientConnecting_VP_Status_NULL"
+	"CS_TopLevel_PatientConnecting_AP_Status' = CS_TopLevel_PatientConnecting_AP_Status_NULL"
+	"CS_LowLevel_Reinfusion_VP_Status' = CS_LowLevel_Reinfusion_VP_Status_NULL"
+	"limit_window_active' = PRESSURE_MONITOR \215 {FALSE}"
+	"limit_low' = PRESSURE_MONITOR \215 {0}"
+	"limit_high' = PRESSURE_MONITOR \215 {0}"
+	"CS_LowLevel_Reinfusion_AP_NORMAL' = FALSE"
+	"CS_LowLevel_Reinfusion_AP_LOW' = FALSE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where "CS_TopLevel_PatientConnecting_VP_Status = CS_TopLevel_PatientConnecting_VP_Status_NULL""CS_TopLevel_PatientConnecting_AP_Status = CS_TopLevel_PatientConnecting_AP_Status_NULL"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = PatientConnecting_VP_NORMAL""CS_TopLevel_PatientConnecting_AP_Status' = PatientConnecting_AP_NORMAL"
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where "CS_LowLevel_Reinfusion_VP_Status = CS_LowLevel_Reinfusion_VP_Status_NULL""TRUE \8713 ({CS_LowLevel_Reinfusion_AP_NORMAL} \8746 {CS_LowLevel_Reinfusion_AP_LOW})"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_VP_Status' = Reinfusion_VP_NORMAL""CS_LowLevel_Reinfusion_AP_NORMAL' = TRUE"
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where "(CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_HIGH \8744 CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_NORMAL \8744 CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_LOW)""(CS_TopLevel_PatientConnecting_AP_Status = PatientConnecting_AP_LOW \8744 CS_TopLevel_PatientConnecting_AP_Status = PatientConnecting_AP_NORMAL)"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = CS_TopLevel_PatientConnecting_VP_Status_NULL""CS_TopLevel_PatientConnecting_AP_Status' = CS_TopLevel_PatientConnecting_AP_Status_NULL"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where "(CS_LowLevel_Reinfusion_VP_Status = Reinfusion_VP_NORMAL \8744 CS_LowLevel_Reinfusion_VP_Status = Reinfusion_VP_HIGH)""(CS_LowLevel_Reinfusion_AP_NORMAL = TRUE \8744 CS_LowLevel_Reinfusion_AP_LOW = TRUE)"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_VP_Status' = CS_LowLevel_Reinfusion_VP_Status_NULL""CS_LowLevel_Reinfusion_AP_NORMAL' = FALSE""CS_LowLevel_Reinfusion_AP_LOW' = FALSE"
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "PM_SetsPressure" Ordinary = 
+ 	 refines "PM_SetsPressure"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_RaisesAlarm" Ordinary = 
+ 	 refines "CS_TopLevel_RaisesAlarm"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_ActivatesLimitWindow" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pm \8712 PRESSURE_MONITOR""ll \8712 \8484""lh \8712 \8484""limit_window_active(pm) = FALSE""pressure(pm) \8804 lh""ll \8804 pressure(pm)"
+	 with 
+	 thenAct "limit_window_active(pm)' = TRUE""limit_low(pm)' = ll""limit_high(pm)' = lh"
+
+   Event "CS_LowLevel_PM_DeactivatesLimitWindow" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pm \8712 PRESSURE_MONITOR""limit_window_active(pm) = TRUE"
+	 with 
+	 thenAct "limit_window_active(pm)' = FALSE"
+
+   Event "CS_LowLevel_PM_Therapy_OutOfRange" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "pm \8712 PRESSURE_MONITOR""CS_LowLevel_Overall = NORMAL""limit_window_active(pm) = TRUE""pressure(pm) \8713 limit_low(pm)\8229limit_high(pm)""INITIATION_sm = THERAPY""pm \8712 {AP, VP}"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(VP) > PatientConnecting_VP_HIGH_LIMIT""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_NORMAL"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = PatientConnecting_VP_HIGH"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(VP) \8804 PatientConnecting_VP_HIGH_LIMIT""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_HIGH"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = PatientConnecting_VP_NORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "limit_window_active(VP) = TRUE \8658 limit_low(VP) \8804 pressure(VP)""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_LOW"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = PatientConnecting_VP_NORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "limit_window_active(VP) = TRUE""pressure(VP) < limit_low(VP)""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_NORMAL"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_VP_Status' = PatientConnecting_VP_LOW"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_LOW"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL""CS_TopLevel_PatientConnecting_VP_Status = PatientConnecting_VP_HIGH"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "limit_window_active(AP) = TRUE""pressure(AP) < limit_low(AP)""CS_TopLevel_PatientConnecting_AP_Status = PatientConnecting_AP_NORMAL"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_AP_Status' = PatientConnecting_AP_LOW"
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "limit_window_active(AP) = TRUE \8658 limit_low(AP) \8804 pressure(AP)""CS_TopLevel_PatientConnecting_AP_Status = PatientConnecting_AP_LOW"
+	 with 
+	 thenAct "CS_TopLevel_PatientConnecting_AP_Status' = PatientConnecting_AP_NORMAL"
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL""CS_TopLevel_PatientConnecting_AP_Status = PatientConnecting_AP_LOW"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(VP) > Reinfusion_VP_HIGH_LIMIT""CS_LowLevel_Reinfusion_VP_Status = Reinfusion_VP_NORMAL"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_VP_Status' = Reinfusion_VP_HIGH"
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL""CS_LowLevel_Reinfusion_VP_Status = Reinfusion_VP_HIGH"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(VP) \8804 Reinfusion_VP_HIGH_LIMIT""CS_LowLevel_Reinfusion_VP_Status = Reinfusion_VP_HIGH"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_VP_Status' = Reinfusion_VP_NORMAL"
+
+   Event "CS_LowLevel_Reinfusion_AP_Low" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(AP) < Reinfusion_AP_LOW_LIMIT""CS_LowLevel_Reinfusion_AP_NORMAL = TRUE"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_AP_NORMAL' = FALSE""CS_LowLevel_Reinfusion_AP_LOW' = TRUE"
+
+   Event "CS_LowLevel_Reinfusion_AP_Low_2_Normal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "pressure(AP) \8805 Reinfusion_AP_LOW_LIMIT""CS_LowLevel_Reinfusion_AP_LOW = TRUE"
+	 with 
+	 thenAct "CS_LowLevel_Reinfusion_AP_LOW' = FALSE""CS_LowLevel_Reinfusion_AP_NORMAL' = TRUE"
+
+   Event "CS_LowLevel_Reinfusion_AP_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Overall = NORMAL""CS_LowLevel_Reinfusion_AP_LOW = TRUE"
+	 with 
+	 thenAct "CS_LowLevel_Overall' = ABNORMAL"
+
+
+ end 
+,spec m913 = 
+m912 and 
+ c6-CFTestingSignal and "c7-concentrates" and "c8-rinsing_parameters" and "c911-pressure_monitors" and "c912-PM_limits" and "m913_implicitContext"
+ then 
+   ops "CS_LowLevel_Therapy_BP_Control" : "CS_LowLevel_Therapy_BP_Control_STATES"
+	"RUNNING_statemachine1" : "RUNNING_statemachine1_STATES"
+	"CS_LowLevel_Initiation_BP_Stop" : "CS_LowLevel_Initiation_BP_Stop_STATES"
+	"CS_LowLevel_Therapy_BP_Control" : "CS_LowLevel_Therapy_BP_Control_STATES"
+	"RUNNING_statemachine1" : "RUNNING_statemachine1_STATES"
+	"CS_LowLevel_Initiation_BP_Stop" : "CS_LowLevel_Initiation_BP_Stop_STATES"
+	"BP_speed" : "\8469"
+	"ENV_BF" : "\8484"
+	
+   predsÿ
+	"RUNNING_statemachine1 \8800 RUNNING_statemachine1_NULL \8660 CS_LowLevel_Therapy_BP_Control = RUNNING&RUNNING_statemachine1' \8800 RUNNING_statemachine1'_NULL \8660 CS_LowLevel_Therapy_BP_Control' = RUNNING"
+	"(CS_TopLevel = STANDBY) \8658 (BP_active = FALSE)&(CS_TopLevel' = STANDBY) \8658 (BP_active' = FALSE)"
+	"(ENDING_sm = CARTRIDGE_EMPTYING) \8658 (BP_active = FALSE)&(ENDING_sm' = CARTRIDGE_EMPTYING) \8658 (BP_active' = FALSE)"
+	"(ENDING_sm = THERAPY_OVERVIEWING) \8658 (BP_active = FALSE)&(ENDING_sm' = THERAPY_OVERVIEWING) \8658 (BP_active' = FALSE)"
+	"(CS_LowLevel_Therapy_BP_Control = RUNNING) \8658 (BP_active = TRUE)&(CS_LowLevel_Therapy_BP_Control' = RUNNING) \8658 (BP_active' = TRUE)"
+	"BP_active = FALSE \8658 BP_speed = 0&BP_active' = FALSE \8658 BP_speed' = 0"
+	"CS_LowLevel_Therapy_BP_Control \8800 CS_LowLevel_Therapy_BP_Control_NULL\n\8658\nINITIATION_sm = THERAPY&CS_LowLevel_Therapy_BP_Control' \8800 CS_LowLevel_Therapy_BP_Control'_NULL\n\8658\nINITIATION_sm' = THERAPY"
+	"INITIATION_sm = THERAPY\n\8658\nCS_LowLevel_Therapy_BP_Control \8800 CS_LowLevel_Therapy_BP_Control_NULL&INITIATION_sm' = THERAPY\n\8658\nCS_LowLevel_Therapy_BP_Control' \8800 CS_LowLevel_Therapy_BP_Control'_NULL"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_LowLevel_Therapy_BP_Control' = CS_LowLevel_Therapy_BP_Control_NULL"
+	"RUNNING_statemachine1' = RUNNING_statemachine1_NULL"
+	"CS_LowLevel_Initiation_BP_Stop' = CS_LowLevel_Initiation_BP_Stop_NULL"
+	"BP_active' = FALSE"
+	"BP_speed' = 0"
+	"ENV_BF' = 0"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where "BP_active = FALSE""CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_NULL"
+	 with 
+	 thenAct "CS_LowLevel_Initiation_BP_Stop' = CS_LowLevel_Initiation_BP_Stop_NORMAL"
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where "RUNNING_statemachine1 = S5""(CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_STOP \8744 CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_NORMAL)"
+	 with 
+	 thenAct "RUNNING_statemachine1' = RUNNING_statemachine1_NULL""CS_LowLevel_Therapy_BP_Control' = CS_LowLevel_Therapy_BP_Control_NULL""CS_LowLevel_Initiation_BP_Stop' = CS_LowLevel_Initiation_BP_Stop_NULL"
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where "BP_active = FALSE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where "BP_active = TRUE""CS_LowLevel_Therapy_BP_Control = CS_LowLevel_Therapy_BP_Control_NULL"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S1""CS_LowLevel_Therapy_BP_Control' = RUNNING"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where "BP_active = FALSE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where "BP_active = FALSE"
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where "BP_active = TRUE"
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "PM_SetsPressure" Ordinary = 
+ 	 refines "PM_SetsPressure"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_RaisesAlarm" Ordinary = 
+ 	 refines "CS_TopLevel_RaisesAlarm"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_ActivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_ActivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_DeactivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_DeactivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Therapy_OutOfRange" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Therapy_OutOfRange"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_TS_Preparing" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""PREPARATION_sm = TS_PREPARING"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Rinsing" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""PREPARATION_sm = DIALYZER_RINSING"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""CS_TopLevel_PatientConnecting = PatientConnecting_BF_INITIATING"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BP_Restarting" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""CS_TopLevel_PatientConnecting = PatientConnecting_BP_RESTARTING"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_Therapy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LowLevel_Therapy_BP_Control = PAUSE""BP_active = FALSE""INITIATION_sm = THERAPY"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_Reinfusion" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""ENDING_sm = REINFUSION"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Emptying" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = FALSE""ENDING_sm = DIALYZER_EMPTYING"
+	 with 
+	 thenAct "BP_active' = TRUE""BP_speed :\8712 \8469"
+
+   Event "CS_LowLevel_BP_Off_TS_Preparing" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""PREPARATION_sm = TS_PREPARING"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Rinsing" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""PREPARATION_sm = DIALYZER_RINSING"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "CS_LowLevel_BP_Off_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""CS_TopLevel_PatientConnecting = PatientConnecting_BF_INITIATING"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "CS_LowLevel_BP_Off_Therapy" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LowLevel_Therapy_BP_Control = PAUSE""BP_active = TRUE""INITIATION_sm = THERAPY"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "CS_LowLevel_BP_Off_Reinfusion" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""ENDING_sm = REINFUSION"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Emptying" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""ENDING_sm = DIALYZER_EMPTYING"
+	 with 
+	 thenAct "BP_active' = FALSE""BP_speed' = 0"
+
+   Event "ENV_Change_BF" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where 
+	 with 
+	 thenAct "ENV_BF :\8712 \8484"
+
+   Event "cnt_readInputs" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S1"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S2"
+
+   Event "cnt_updateProgress" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S2"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S3"
+
+   Event "cnt_bfap" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S3"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S4"
+
+   Event "cnt_bf" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S4"
+	 with 
+	 thenAct "BP_speed :\8712 \8469""RUNNING_statemachine1' = S5"
+
+   Event "cnt_therapyFinished" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "(RUNNING_statemachine1 = S3 \8744 RUNNING_statemachine1 = S2)"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S5"
+
+   Event "cnt_rtc" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S5"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S1"
+
+   Event "cnt_pause" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S1"
+	 with 
+	 thenAct "RUNNING_statemachine1' = RUNNING_statemachine1_NULL""CS_LowLevel_Therapy_BP_Control' = PAUSE"
+
+   Event "cnt_resume" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "BP_active = TRUE""CS_LowLevel_Therapy_BP_Control = PAUSE"
+	 with 
+	 thenAct "RUNNING_statemachine1' = S1""CS_LowLevel_Therapy_BP_Control' = RUNNING"
+
+   Event "CS_LowLevel_Initiation_BP_Stops" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENV_BF = 0""CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_NORMAL"
+	 with 
+	 thenAct "CS_LowLevel_Initiation_BP_Stop' = CS_LowLevel_Initiation_BP_Stop_STOP"
+
+   Event "CS_LowLevel_Initiation_BP_Stop2Normal" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ENV_BF \8800 0""CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_STOP"
+	 with 
+	 thenAct "CS_LowLevel_Initiation_BP_Stop' = CS_LowLevel_Initiation_BP_Stop_NORMAL"
+
+   Event "CS_LowLevel_Initiation_BP_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_LowLevel_Initiation_BP_Stop = CS_LowLevel_Initiation_BP_Stop_STOP"
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Low_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_TopLevel = INITIATION""ENV_BF \8727 10 < BP_speed \8727 7"
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Backward_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "CS_TopLevel = INITIATION""ENV_BF < 0"
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_ConnectingPatient_BF_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "INITIATION_sm = PATIENT_CONNECTING""ENV_BF = 0"
+	 with 
+	 thenAct 
+
+
+ end 
+,spec m914 = 
+m913 and 
+ m914_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters" and "c911-pressure_monitors" and "c912-PM_limits"
+ then 
+   ops "ARTERIAL_BOLUS" : "ARTERIAL_BOLUS_STATES"
+	"PAUSE_statemachine1" : "PAUSE_statemachine1_STATES"
+	"ARTERIAL_BOLUS" : "ARTERIAL_BOLUS_STATES"
+	"PAUSE_statemachine1" : "PAUSE_statemachine1_STATES"
+	
+   predsÿ
+	"ARTERIAL_BOLUS \8800 ARTERIAL_BOLUS_NULL \8660 INITIATION_sm = THERAPY&ARTERIAL_BOLUS' \8800 ARTERIAL_BOLUS'_NULL \8660 INITIATION_sm' = THERAPY"
+	"PAUSE_statemachine1 \8800 PAUSE_statemachine1_NULL \8660 CS_LowLevel_Therapy_BP_Control = PAUSE&PAUSE_statemachine1' \8800 PAUSE_statemachine1'_NULL \8660 CS_LowLevel_Therapy_BP_Control' = PAUSE"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "ARTERIAL_BOLUS' = ARTERIAL_BOLUS_NULL"
+	"PAUSE_statemachine1' = PAUSE_statemachine1_NULL"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where "ARTERIAL_BOLUS = ARTERIAL_BOLUS_OFF"
+	 with 
+	 thenAct "ARTERIAL_BOLUS' = ARTERIAL_BOLUS_NULL"
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct "ARTERIAL_BOLUS' = ARTERIAL_BOLUS_OFF"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "PM_SetsPressure" Ordinary = 
+ 	 refines "PM_SetsPressure"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_RaisesAlarm" Ordinary = 
+ 	 refines "CS_TopLevel_RaisesAlarm"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_ActivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_ActivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_DeactivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_DeactivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Therapy_OutOfRange" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Therapy_OutOfRange"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_TS_Preparing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_TS_Preparing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Rinsing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Dialyzer_Rinsing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_PatientConnecting_BF_Initiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BP_Restarting" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_PatientConnecting_BP_Restarting"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Therapy" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Therapy"
+ 	 any 
+	 where "PAUSE_statemachine1 = AB_RUNNING"
+	 with 
+	 thenAct "PAUSE_statemachine1' = AB_FINISH"
+
+   Event "CS_LowLevel_BP_On_Reinfusion" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Reinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Emptying" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Dialyzer_Emptying"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_TS_Preparing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_TS_Preparing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Rinsing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Dialyzer_Rinsing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_PatientConnecting_BF_Initiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Therapy" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Therapy"
+ 	 any 
+	 where "PAUSE_statemachine1 = AB_START"
+	 with 
+	 thenAct "PAUSE_statemachine1' = AB_RUNNING"
+
+   Event "CS_LowLevel_BP_Off_Reinfusion" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Reinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Emptying" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Dialyzer_Emptying"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "ENV_Change_BF" Ordinary = 
+ 	 refines "ENV_Change_BF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_readInputs" Ordinary = 
+ 	 refines "cnt_readInputs"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_updateProgress" Ordinary = 
+ 	 refines "cnt_updateProgress"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_bfap" Ordinary = 
+ 	 refines "cnt_bfap"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_bf" Ordinary = 
+ 	 refines "cnt_bf"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_therapyFinished" Ordinary = 
+ 	 refines "cnt_therapyFinished"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_rtc" Ordinary = 
+ 	 refines "cnt_rtc"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stops" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stops"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stop2Normal" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stop2Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stop_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Low_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BF_Low_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Backward_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BF_Backward_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_ConnectingPatient_BF_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_ConnectingPatient_BF_Stop_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ActivatesArterialBolus" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "ARTERIAL_BOLUS = ARTERIAL_BOLUS_OFF"
+	 with 
+	 thenAct "ARTERIAL_BOLUS' = ARTERIAL_BOLUS_ON"
+
+   Event "CS_TopLevel_DeactivatesArterialBolus" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "RUNNING_statemachine1 = S1""ARTERIAL_BOLUS = ARTERIAL_BOLUS_ON"
+	 with 
+	 thenAct "ARTERIAL_BOLUS' = ARTERIAL_BOLUS_OFF"
+
+   Event "CS_LowLevel_ActivatesArterialBolus" Ordinary = 
+ 	 refines "cnt_pause"
+ 	 any 
+	 where "ARTERIAL_BOLUS = ARTERIAL_BOLUS_ON"
+	 with 
+	 thenAct "PAUSE_statemachine1' = AB_START"
+
+   Event "CS_LowLevel_DeactivatesArterialBolus" Ordinary = 
+ 	 refines "cnt_resume"
+ 	 any 
+	 where "PAUSE_statemachine1 = AB_FINISH"
+	 with 
+	 thenAct "PAUSE_statemachine1' = PAUSE_statemachine1_NULL"
+
+
+ end 
+,spec m915 = 
+m914 and 
+ m915_implicitContext and "c6-CFTestingSignal" and "c7-concentrates" and "c8-rinsing_parameters" and "c911-pressure_monitors" and "c912-PM_limits"
+ then 
+   ops "CS_LowLevel_Heparin_OFF" : "BOOL"
+	"CS_LowLevel_Heparin_ON" : "BOOL"
+	"Check_Heparin" : "BOOL"
+	"Update_Heparin" : "BOOL"
+	"CS_LowLevel_Heparin_OFF" : "BOOL"
+	"CS_LowLevel_Heparin_ON" : "BOOL"
+	"Check_Heparin" : "BOOL"
+	"Update_Heparin" : "BOOL"
+	"Heparin_Negative" : "BOOL"
+	
+   predsÿ
+	"(CS_LowLevel_Heparin_ON = TRUE) \8658 partition({TRUE}, {Check_Heparin} \8745 {TRUE}, {Update_Heparin} \8745 {TRUE})&(CS_LowLevel_Heparin_ON' = TRUE) \8658 partition({TRUE}, {Check_Heparin'} \8745 {TRUE}, {Update_Heparin'} \8745 {TRUE})"
+	"(Check_Heparin = TRUE) \8658 (CS_LowLevel_Heparin_ON = TRUE)&(Check_Heparin' = TRUE) \8658 (CS_LowLevel_Heparin_ON' = TRUE)"
+	"(Update_Heparin = TRUE) \8658 (CS_LowLevel_Heparin_ON = TRUE)&(Update_Heparin' = TRUE) \8658 (CS_LowLevel_Heparin_ON' = TRUE)"
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct "CS_LowLevel_Heparin_OFF' = FALSE"
+	"CS_LowLevel_Heparin_ON' = FALSE"
+	"Check_Heparin' = FALSE"
+	"Update_Heparin' = FALSE"
+	"Heparin_Negative' = FALSE"
+	
+   Event "User_PressesOn" Ordinary = 
+ 	 refines "User_PressesOn"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingArterially" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsReinfusion" Ordinary = 
+ 	 refines "HDSystem_StartsReinfusion"
+ 	 any 
+	 where "CS_LowLevel_Heparin_OFF = TRUE"
+	 with 
+	 thenAct "CS_LowLevel_Heparin_OFF' = FALSE"
+
+   Event "User_PressesOff" Ordinary = 
+ 	 refines "User_PressesOff"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_StartsConnectingConcentrate" Ordinary = 
+ 	 refines "CS_TopLevel_StartsConnectingConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingRP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingRP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingTS" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingTS"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsPreparingHP" Ordinary = 
+ 	 refines "HDSystem_StartsPreparingHP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsSettingTP" Ordinary = 
+ 	 refines "HDSystem_StartsSettingTP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsRinsingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsRinsingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsTherapy"
+ 	 any 
+	 where "TRUE \8713 ({CS_LowLevel_Heparin_OFF} \8746 {CS_LowLevel_Heparin_ON})"
+	 with 
+	 thenAct "CS_LowLevel_Heparin_OFF' = TRUE"
+
+   Event "HDSystem_StartsEmptyingDialyzer" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingDialyzer"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsEmptyingCartridge" Ordinary = 
+ 	 refines "HDSystem_StartsEmptyingCartridge"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsOverviewingTherapy" Ordinary = 
+ 	 refines "HDSystem_StartsOverviewingTherapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StartsTestingCF" Ordinary = 
+ 	 refines "CS_LowLevel_StartsTestingCF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_StandsBy" Ordinary = 
+ 	 refines "CS_LowLevel_StandsBy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsOK" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsOK"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_CFTestsKO" Ordinary = 
+ 	 refines "CS_LowLevel_CFTestsKO"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDMachine_CFTests" Ordinary = 
+ 	 refines "HDMachine_CFTests"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Green" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Green"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_CFTestingSignal2Red" Ordinary = 
+ 	 refines "CS_TopLevel_CFTestingSignal2Red"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ConnectsConcentrate" Ordinary = 
+ 	 refines "User_ConnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_DisconnectsConcentrate" Ordinary = 
+ 	 refines "User_DisconnectsConcentrate"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_SetsRinsingParameters" Ordinary = 
+ 	 refines "User_SetsRinsingParameters"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToRED" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToRED"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToGREEN" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToGREEN"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_SignalToORANGE" Ordinary = 
+ 	 refines "CS_TopLevel_SignalToORANGE"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsBFInitiating" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsBFInitiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_StartsConnectingVenously" Ordinary = 
+ 	 refines "HDSystem_StartsConnectingVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_RestartsBP" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_RestartsBP"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "HDSystem_PatientConnecting_StartsLeavingBypassMode" Ordinary = 
+ 	 refines "HDSystem_PatientConnecting_StartsLeavingBypassMode"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsArterially" Ordinary = 
+ 	 refines "Patient_ConnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsVenously" Ordinary = 
+ 	 refines "Patient_DisconnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_DisconnectsArterially" Ordinary = 
+ 	 refines "Patient_DisconnectsArterially"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "Patient_ConnectsVenously" Ordinary = 
+ 	 refines "Patient_ConnectsVenously"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "PM_SetsPressure" Ordinary = 
+ 	 refines "PM_SetsPressure"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_RaisesAlarm" Ordinary = 
+ 	 refines "CS_TopLevel_RaisesAlarm"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_ActivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_ActivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_DeactivatesLimitWindow" Ordinary = 
+ 	 refines "CS_LowLevel_PM_DeactivatesLimitWindow"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Therapy_OutOfRange" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Therapy_OutOfRange"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_2_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_PatientConnecting_AP_Low_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_PM_Reinfusion_VP_High_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Low_2_Normal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Low_2_Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Reinfusion_AP_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Reinfusion_AP_Abnormal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_TS_Preparing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_TS_Preparing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Rinsing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Dialyzer_Rinsing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_PatientConnecting_BF_Initiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_PatientConnecting_BP_Restarting" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_PatientConnecting_BP_Restarting"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Therapy" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Therapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Reinfusion" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Reinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_On_Dialyzer_Emptying" Ordinary = 
+ 	 refines "CS_LowLevel_BP_On_Dialyzer_Emptying"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_TS_Preparing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_TS_Preparing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Rinsing" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Dialyzer_Rinsing"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_PatientConnecting_BF_Initiating" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_PatientConnecting_BF_Initiating"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Therapy" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Therapy"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Reinfusion" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Reinfusion"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_BP_Off_Dialyzer_Emptying" Ordinary = 
+ 	 refines "CS_LowLevel_BP_Off_Dialyzer_Emptying"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "ENV_Change_BF" Ordinary = 
+ 	 refines "ENV_Change_BF"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_readInputs" Ordinary = 
+ 	 refines "cnt_readInputs"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_updateProgress" Ordinary = 
+ 	 refines "cnt_updateProgress"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_bfap" Ordinary = 
+ 	 refines "cnt_bfap"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_bf" Ordinary = 
+ 	 refines "cnt_bf"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_therapyFinished" Ordinary = 
+ 	 refines "cnt_therapyFinished"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "cnt_rtc" Ordinary = 
+ 	 refines "cnt_rtc"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stops" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stops"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stop2Normal" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stop2Normal"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BP_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BP_Stop_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Low_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BF_Low_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Initiation_BF_Backward_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_Initiation_BF_Backward_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_ConnectingPatient_BF_Stop_Alarms" Ordinary = 
+ 	 refines "CS_LowLevel_ConnectingPatient_BF_Stop_Alarms"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "User_ActivatesArterialBolus" Ordinary = 
+ 	 refines "User_ActivatesArterialBolus"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_TopLevel_DeactivatesArterialBolus" Ordinary = 
+ 	 refines "CS_TopLevel_DeactivatesArterialBolus"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_ActivatesArterialBolus" Ordinary = 
+ 	 refines "CS_LowLevel_ActivatesArterialBolus"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_DeactivatesArterialBolus" Ordinary = 
+ 	 refines "CS_LowLevel_DeactivatesArterialBolus"
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Heparin_On" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "CS_LowLevel_Heparin_OFF = TRUE"
+	 with 
+	 thenAct "CS_LowLevel_Heparin_OFF' = FALSE""Update_Heparin' = TRUE""CS_LowLevel_Heparin_ON' = TRUE"
+
+   Event "CS_LowLevel_Heparin_Off" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "Update_Heparin = TRUE"
+	 with 
+	 thenAct "Update_Heparin' = FALSE""CS_LowLevel_Heparin_ON' = FALSE""Heparin_Negative' = FALSE""CS_LowLevel_Heparin_OFF' = TRUE"
+
+   Event "CS_LowLevel_Heparin_Updates" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "Update_Heparin = TRUE"
+	 with 
+	 thenAct "Update_Heparin' = FALSE""Heparin_Negative :\8712 BOOL""Check_Heparin' = TRUE"
+
+   Event "CS_LowLevel_Heparin_Negative_Abnormal" Ordinary = 
+ 	 refines "CS_LowLevel_Abnormal"
+ 	 any 
+	 where "Heparin_Negative = TRUE""Check_Heparin = TRUE"
+	 with 
+	 thenAct 
+
+   Event "CS_LowLevel_Heparin_Positve" Ordinary = 
+ 	 refines 
+ 	 any 
+	 where "Heparin_Negative = FALSE""Check_Heparin = TRUE"
+	 with 
+	 thenAct "Check_Heparin' = FALSE""Update_Heparin' = TRUE"
+
+
+ end 
+]
