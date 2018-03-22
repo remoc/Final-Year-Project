@@ -1,0 +1,136 @@
+spec DATAm2 over EVT =
+ DATAm0 and m2_implicitConext
+ then 
+   ops CS_LL_CF_NOT_TESTED : BOOL
+	CS_LL_CF_TESTING : BOOL
+	CS_LL_CF_TESTED_OK : BOOL
+	CS_LL_CF_TESTED_KO : BOOL
+	CS_LL_CF_NOT_TESTED : BOOL
+	CS_LL_CF_TESTING : BOOL
+	CS_LL_CF_TESTED_OK : BOOL
+	CS_LL_CF_TESTED_KO : BOOL
+	
+   predsÿ
+	partition({TRUE}, {CS_LL_CF_NOT_TESTED} \8745 {TRUE}, {CS_LL_CF_TESTING} \8745 {TRUE}, {CS_LL_CF_TESTED_OK} \8745 {TRUE}, {CS_LL_CF_TESTED_KO} \8745 {TRUE})&partition({TRUE}, {CS_LL_CF_NOT_TESTED'} \8745 {TRUE}, {CS_LL_CF_TESTING'} \8745 {TRUE}, {CS_LL_CF_TESTED_OK'} \8745 {TRUE}, {CS_LL_CF_TESTED_KO'} \8745 {TRUE})
+	(CS_TopLevel = PREPARATION) \8658 (PREPARATION_sm \8800 CF_TESTING \8658 CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = PREPARATION) \8658 (PREPARATION_sm' \8800 CF_TESTING \8658 CS_LL_CF_TESTED_OK' = TRUE)
+	(CS_TopLevel = INITIATION) \8658 (CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = INITIATION) \8658 (CS_LL_CF_TESTED_OK' = TRUE)
+	(CS_TopLevel = ENDING) \8658 (CS_LL_CF_TESTED_OK = TRUE)&(CS_TopLevel' = ENDING) \8658 (CS_LL_CF_TESTED_OK' = TRUE)
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct CS_LL_CF_NOT_TESTED' = TRUE
+	CS_LL_CF_TESTING' = FALSE
+	CS_LL_CF_TESTED_OK' = FALSE
+	CS_LL_CF_TESTED_KO' = FALSE
+
+
+spec m2 = 
+ DATAm2 and (m1 hide via HDSystem_StartsTestingCF -> User_PressesOn Ordinary, HDSystem_StartsConnectingPatient -> HDSystem_StartsConnectingPatient, HDSystem_StartsReinfusion -> HDSystem_StartsReinfusion, HDSystem_StartsStandingBy -> User_PressesOff, HDSystem_StartsConnectingConcentrate -> HDSystem_StartsConnectingConcentrate ///////) and 
+
+	
+   Event User_PressesOn Ordinary = 
+ 	 any 
+	 where CS_LL_CF_NOT_TESTED = TRUE
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsConnectingConcentrate Ordinary = 
+ 	 any 
+	 where CS_LL_CF_TESTED_OK = TRUE
+	 with 
+	 thenAct 
+
+////////////////////// if two names the same should I use hide via?
+   Event HDSystem_StartsSettingRP Ordinary = 
+ 	 refines HDSystem_StartsSettingRP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsPreparingTS Ordinary = 
+ 	 refines HDSystem_StartsPreparingTS
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsPreparingHP Ordinary = 
+ 	 refines HDSystem_StartsPreparingHP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsSettingTP Ordinary = 
+ 	 refines HDSystem_StartsSettingTP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsRinsingDialyzer Ordinary = 
+ 	 refines HDSystem_StartsRinsingDialyzer
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsTherapy Ordinary = 
+ 	 refines HDSystem_StartsTherapy
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsEmptyingDialyzer Ordinary = 
+ 	 refines HDSystem_StartsEmptyingDialyzer
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsEmptyingCartridge Ordinary = 
+ 	 refines HDSystem_StartsEmptyingCartridge
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsOverviewingTherapy Ordinary = 
+ 	 refines HDSystem_StartsOverviewingTherapy
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+/////////////////////////////////////////////////
+
+   Event CS_LowLevel_StartsTestingCF Ordinary = 
+ 	 refines 
+ 	 any 
+	 where PREPARATION_sm = CF_TESTINGCS_LL_CF_NOT_TESTED = TRUE
+	 with 
+	 thenAct CS_LL_CF_NOT_TESTED' = FALSECS_LL_CF_TESTING' = TRUE
+
+   Event CS_LowLevel_StandsBy Ordinary = 
+ 	 refines 
+ 	 any 
+	 where CS_TopLevel = STANDBYCS_LL_CF_TESTED_OK = TRUE
+	 with 
+	 thenAct CS_LL_CF_TESTED_OK' = FALSECS_LL_CF_NOT_TESTED' = TRUE
+
+   Event CS_LowLevel_CFTestsOK Ordinary = 
+ 	 refines 
+ 	 any 
+	 where CS_LL_CF_TESTING = TRUE
+	 with 
+	 thenAct CS_LL_CF_TESTING' = FALSECS_LL_CF_TESTED_OK' = TRUE
+
+   Event CS_LowLevel_CFTestsKO Ordinary = 
+ 	 refines 
+ 	 any 
+	 where CS_LL_CF_TESTING = TRUE
+	 with 
+	 thenAct CS_LL_CF_TESTING' = FALSECS_LL_CF_TESTED_KO' = TRUE
+
+
+ end 

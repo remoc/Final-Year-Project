@@ -1,0 +1,143 @@
+spec DATAm3 over EVT = 
+ DATAm1 and m3_implicitContext
+ then 
+   ops HDMachine_CFTestedOK : BOOL
+	
+   predsÿ
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct HDMachine_CFTestedOK :\8712 BOOL
+end 
+
+spec m3 = 
+ (m2 hide via HDSystem_StartsConnectingConcentrate -> CS_TopLevel_StartsConnectingConcentrate) and DATAm3 and
+ 
+ /////////////
+   Event User_PressesOn Ordinary = 
+ 	 refines User_PressesOn
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsConnectingPatient Ordinary = 
+ 	 refines HDSystem_StartsConnectingPatient
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsReinfusion Ordinary = 
+ 	 refines HDSystem_StartsReinfusion
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event User_PressesOff Ordinary = 
+ 	 refines User_PressesOff
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsSettingRP Ordinary = 
+ 	 refines HDSystem_StartsSettingRP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsPreparingTS Ordinary = 
+ 	 refines HDSystem_StartsPreparingTS
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsPreparingHP Ordinary = 
+ 	 refines HDSystem_StartsPreparingHP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsSettingTP Ordinary = 
+ 	 refines HDSystem_StartsSettingTP
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsRinsingDialyzer Ordinary = 
+ 	 refines HDSystem_StartsRinsingDialyzer
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsTherapy Ordinary = 
+ 	 refines HDSystem_StartsTherapy
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsEmptyingDialyzer Ordinary = 
+ 	 refines HDSystem_StartsEmptyingDialyzer
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsEmptyingCartridge Ordinary = 
+ 	 refines HDSystem_StartsEmptyingCartridge
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event HDSystem_StartsOverviewingTherapy Ordinary = 
+ 	 refines HDSystem_StartsOverviewingTherapy
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event CS_LowLevel_StartsTestingCF Ordinary = 
+ 	 refines CS_LowLevel_StartsTestingCF
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+
+   Event CS_LowLevel_StandsBy Ordinary = 
+ 	 refines CS_LowLevel_StandsBy
+ 	 any 
+	 where 
+	 with 
+	 thenAct 
+\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+   Event CS_LowLevel_CFTestsOK Ordinary = 
+ 	 refines CS_LowLevel_CFTestsOK
+ 	 any 
+	 where HDMachine_CFTestedOK = TRUE
+	 with 
+	 thenAct 
+
+   Event CS_LowLevel_CFTestsKO Ordinary = 
+ 	 refines CS_LowLevel_CFTestsKO
+ 	 any 
+	 where HDMachine_CFTestedOK = FALSE
+	 with 
+	 thenAct 
+
+   Event HDMachine_CFTests Ordinary = 
+ 	 refines 
+ 	 any 
+	 where CS_LL_CF_TESTING = TRUE
+	 with 
+	 thenAct HDMachine_CFTestedOK :\8712 BOOL
+
+ end 

@@ -1,0 +1,28 @@
+spec DATAm0 over EVT =
+	m0_implicitContext
+	then
+	 ops CS_TopLevel : CS_TopLevel_STATES
+	preds
+	Events
+	Initialisation Ordinary =
+	 thenAct CS_TopLevel = STANDBY
+end
+
+spec r0 over EVT =
+	d0
+
+	preds
+	Events
+	Event E1 = 
+	 refines
+	 any
+	 where s1 = n1
+	 thenAct s1 = n2
+end
+
+spec m0 = 
+ (r0 with d0 -> DATAm0, E1 -> HDSystem_Prepares Ordinary, s1 -> CS_TopLevel, n1-> STANDBY, n2-> PREPARATION)
+ and (r0 with d0 -> DATAm0, E1 -> HDSystem_Initiates Ordinary, s1 -> CS_TopLevel, n1-> PREPARATION, n2-> INITIATION)
+ and (r0 with d0 -> DATAm0, E1 -> HDSystem_Ends Ordinary, s1 -> CS_TopLevel, n1-> INITIATION, n2-> ENDING)
+ and (r0 with d0 -> DATAm0, E1 -> HDSystem_StandsBy Ordinary, s1 -> CS_TopLevel, n1-> ENDING, n2-> STANDBY)
+end

@@ -1,0 +1,245 @@
+spec m0_implicitContext = 
+    sorts 
+	 CS_TopLevel_STATES
+	 HDSystem_STATES
+    ops 
+     STANDBY : CS_TopLevel_STATES
+	 PREPARATION : CS_TopLevel_STATES
+	 INITIATION : CS_TopLevel_STATES
+	 ENDING : CS_TopLevel_STATES
+	 HDSystem_STANDBY : HDSystem_STATES
+	 HDSystem_PREP : HDSystem_STATES
+	 HDSystem_INIT : HDSystem_STATES
+	 HDSystem_END : HDSystem_STATES
+	
+    preds
+	 partition(CS_TopLevel_STATES, {STANDBY}, {PREPARATION}, {INITIATION}, {ENDING})
+	 partition(HDSystem_STATES, {HDSystem_STANDBY}, {HDSystem_PREP}, {HDSystem_INIT}, {HDSystem_END})
+ end 
+
+ spec m5_implicitContext = m4_implicitConext = m3_implicitConext = m2_implicitContext = m1_implicitContext = m0_implicitContext    
+	sorts 
+	 PREPARATION_sm_STATES
+	 INITIATION_sm_STATES
+	 ENDING_sm_STATES
+	 HDSystem_PREP_sm_STATES
+	 HDSystem_INIT_sm_STATES
+	 HDSystem_END_sm_STATES
+    ops 
+     PREPARATION_sm_NULL : PREPARATION_sm_STATES
+	 CF_TESTING : PREPARATION_sm_STATES
+	 CONCENTRATE_CONNECTING : PREPARATION_sm_STATES
+	 RP_SETTING : PREPARATION_sm_STATES
+	 TS_PREPARING : PREPARATION_sm_STATES
+	 HP_PREPARING : PREPARATION_sm_STATES
+	 TP_SETTING : PREPARATION_sm_STATES
+	 DIALYZER_RINSING : PREPARATION_sm_STATES
+	 INITIATION_sm_NULL : INITIATION_sm_STATES
+	 PATIENT_CONNECTING : INITIATION_sm_STATES
+	 THERAPY : INITIATION_sm_STATES
+	 ENDING_sm_NULL : ENDING_sm_STATES
+	 REINFUSION : ENDING_sm_STATES
+	 DIALYZER_EMPTYING : ENDING_sm_STATES
+	 CARTRIDGE_EMPTYING : ENDING_sm_STATES
+	 THERAPY_OVERVIEWING : ENDING_sm_STATES
+	 HDSystem_PREP_sm_NULL : HDSystem_PREP_sm_STATES
+	 HDSystem_Testing : HDSystem_PREP_sm_STATES
+	 HDSystem_ConnectingConcentrate : HDSystem_PREP_sm_STATES
+	 HDSystem_SettingRinsingParameters : HDSystem_PREP_sm_STATES
+	 HDSystem_PreparingTubingSystem : HDSystem_PREP_sm_STATES
+	 HDSystem_PreparingHP : HDSystem_PREP_sm_STATES
+	 HDSystem_SettingTreatmentParameters : HDSystem_PREP_sm_STATES
+	 HDSystem_RinsingDialyzer : HDSystem_PREP_sm_STATES
+	 HDSystem_INIT_sm_NULL : HDSystem_INIT_sm_STATES
+	 HDSystem_ConnectingPatient : HDSystem_INIT_sm_STATES
+	 HDSystem_Therapy : HDSystem_INIT_sm_STATES
+	 HDSystem_END_sm_NULL : HDSystem_END_sm_STATES
+	 HDSystem_Reinfusion : HDSystem_END_sm_STATES
+	 HDSystem_EmptyingDialyzer : HDSystem_END_sm_STATES
+	 HDSystem_EmptyingCartridge : HDSystem_END_sm_STATES
+	 HDSystem_DisplayingOverview : HDSystem_END_sm_STATES
+	
+    preds
+	 partition(PREPARATION_sm_STATES, {CF_TESTING}, {CONCENTRATE_CONNECTING}, {RP_SETTING}, {TS_PREPARING}, {HP_PREPARING}, {TP_SETTING}, {DIALYZER_RINSING}, {PREPARATION_sm_NULL})
+	 partition(INITIATION_sm_STATES, {PATIENT_CONNECTING}, {THERAPY}, {INITIATION_sm_NULL})
+	 partition(ENDING_sm_STATES, {REINFUSION}, {DIALYZER_EMPTYING}, {CARTRIDGE_EMPTYING}, {THERAPY_OVERVIEWING}, {ENDING_sm_NULL})
+	 partition(HDSystem_PREP_sm_STATES, {HDSystem_Testing}, {HDSystem_ConnectingConcentrate}, {HDSystem_SettingRinsingParameters}, {HDSystem_PreparingTubingSystem}, {HDSystem_PreparingHP}, {HDSystem_SettingTreatmentParameters}, {HDSystem_RinsingDialyzer}, {HDSystem_PREP_sm_NULL})
+	 partition(HDSystem_INIT_sm_STATES, {HDSystem_ConnectingPatient}, {HDSystem_Therapy}, {HDSystem_INIT_sm_NULL})
+	 partition(HDSystem_END_sm_STATES, {HDSystem_Reinfusion}, {HDSystem_EmptyingDialyzer}, {HDSystem_EmptyingCartridge}, {HDSystem_DisplayingOverview}, {HDSystem_END_sm_NULL})
+ end 
+
+spec m8_implicitContext = m7_implicitContext = m6_implicitContext = m5_implicitContext    
+	sorts 
+	 CF_TESTING_sm_STATES
+    ops 
+     CF_TESTING_sm_NULL : CF_TESTING_sm_STATES
+	 CF_TESTING_SIGNAL_OFF : CF_TESTING_sm_STATES
+	 CF_TESTING_SIGNAL_GREEN : CF_TESTING_sm_STATES
+	 CF_TESTING_SIGNAL_RED : CF_TESTING_sm_STATES
+	
+    preds
+	 partition(CF_TESTING_sm_STATES, {CF_TESTING_SIGNAL_OFF}, {CF_TESTING_SIGNAL_GREEN}, {CF_TESTING_SIGNAL_RED}, {CF_TESTING_sm_NULL})
+ end 
+
+spec m9_implicitContext = m8_implicitContext    
+	sorts 
+	 CS_TopLevel_PatientConnecting_STATES
+    ops 
+     CS_TopLevel_PatientConnecting_NULL : CS_TopLevel_PatientConnecting_STATES
+	 PatientConnecting_ARTERIALLY_CONNECTING : CS_TopLevel_PatientConnecting_STATES
+	 PatientConnecting_BF_INITIATING : CS_TopLevel_PatientConnecting_STATES
+	 PatientConnecting_VENOUSLY_CONNECTING : CS_TopLevel_PatientConnecting_STATES
+	 PatientConnecting_BP_RESTARTING : CS_TopLevel_PatientConnecting_STATES
+	 PatientConnecting_BypassModeLeaving : CS_TopLevel_PatientConnecting_STATES
+	
+    preds
+	 partition(CS_TopLevel_PatientConnecting_STATES, {PatientConnecting_ARTERIALLY_CONNECTING}, {PatientConnecting_BF_INITIATING}, {PatientConnecting_VENOUSLY_CONNECTING}, {PatientConnecting_BP_RESTARTING}, {PatientConnecting_BypassModeLeaving}, {CS_TopLevel_PatientConnecting_NULL})
+ end
+
+spec m910_correct_inv_implicitContext = m910_implicitContext = m9_implicitContext    
+	sorts 
+	 PATIENT_CONNECTIONS_STATES
+    ops 
+     PATIENT_DISCONNECTED : PATIENT_CONNECTIONS_STATES
+	 PATIENT_ARTERIALLY_CONNECTED : PATIENT_CONNECTIONS_STATES
+	 PATIENT_BOTH_CONNECTED : PATIENT_CONNECTIONS_STATES
+	 PATIENT_VENOUSLY_CONNECTED : PATIENT_CONNECTIONS_STATES
+	
+    preds
+	 partition(PATIENT_CONNECTIONS_STATES, {PATIENT_DISCONNECTED}, {PATIENT_ARTERIALLY_CONNECTED}, {PATIENT_BOTH_CONNECTED}, {PATIENT_VENOUSLY_CONNECTED})
+ end
+
+spec m911_implicitContext = m910_correct_inv_implicitContext   
+	sorts 
+	 CS_LowLevel_Overall_STATES
+    ops 
+     NORMAL : CS_LowLevel_Overall_STATES
+	 ABNORMAL : CS_LowLevel_Overall_STATES
+	
+    preds
+	 partition(CS_LowLevel_Overall_STATES, {NORMAL}, {ABNORMAL})
+ end 
+
+ spec m912_implicitContext = m911_implicitContext    
+ 	sorts 
+	 CS_TopLevel_PatientConnecting_VP_Status_STATES
+	 CS_TopLevel_PatientConnecting_AP_Status_STATES
+	 CS_LowLevel_Reinfusion_VP_Status_STATES
+    ops 
+     CS_TopLevel_PatientConnecting_VP_Status_NULL : CS_TopLevel_PatientConnecting_VP_Status_STATES
+	 PatientConnecting_VP_NORMAL : CS_TopLevel_PatientConnecting_VP_Status_STATES
+	 PatientConnecting_VP_LOW : CS_TopLevel_PatientConnecting_VP_Status_STATES
+	 PatientConnecting_VP_HIGH : CS_TopLevel_PatientConnecting_VP_Status_STATES
+	 CS_TopLevel_PatientConnecting_AP_Status_NULL : CS_TopLevel_PatientConnecting_AP_Status_STATES
+	 PatientConnecting_AP_NORMAL : CS_TopLevel_PatientConnecting_AP_Status_STATES
+	 PatientConnecting_AP_LOW : CS_TopLevel_PatientConnecting_AP_Status_STATES
+	 CS_LowLevel_Reinfusion_VP_Status_NULL : CS_LowLevel_Reinfusion_VP_Status_STATES
+	 Reinfusion_VP_NORMAL : CS_LowLevel_Reinfusion_VP_Status_STATES
+	 Reinfusion_VP_HIGH : CS_LowLevel_Reinfusion_VP_Status_STATES
+	
+    preds
+	 partition(CS_TopLevel_PatientConnecting_VP_Status_STATES, {PatientConnecting_VP_NORMAL}, {PatientConnecting_VP_LOW}, {PatientConnecting_VP_HIGH}, {CS_TopLevel_PatientConnecting_VP_Status_NULL})
+	 partition(CS_TopLevel_PatientConnecting_AP_Status_STATES, {PatientConnecting_AP_NORMAL}, {PatientConnecting_AP_LOW}, {CS_TopLevel_PatientConnecting_AP_Status_NULL})
+	 partition(CS_LowLevel_Reinfusion_VP_Status_STATES, {Reinfusion_VP_NORMAL}, {Reinfusion_VP_HIGH}, {CS_LowLevel_Reinfusion_VP_Status_NULL})
+ end 
+
+ spec m913_implicitContext = m912_implicitContext    
+ 	sorts 
+	 CS_LowLevel_Therapy_BP_Control_STATES
+	 RUNNING_statemachine1_STATES
+	 CS_LowLevel_Initiation_BP_Stop_STATES
+	 CS_LowLevel_Therapy_BP_Status_STATES
+    ops 
+     CS_LowLevel_Therapy_BP_Control_NULL : CS_LowLevel_Therapy_BP_Control_STATES
+	 RUNNING : CS_LowLevel_Therapy_BP_Control_STATES
+	 RUNNING_statemachine1_NULL : RUNNING_statemachine1_STATES
+	 S1 : RUNNING_statemachine1_STATES
+	 S2 : RUNNING_statemachine1_STATES
+	 S3 : RUNNING_statemachine1_STATES
+	 S4 : RUNNING_statemachine1_STATES
+	 S5 : RUNNING_statemachine1_STATES
+	 PAUSE : CS_LowLevel_Therapy_BP_Control_STATES
+	 CS_LowLevel_Initiation_BP_Stop_NULL : CS_LowLevel_Initiation_BP_Stop_STATES
+	 CS_LowLevel_Initiation_BP_Stop_NORMAL : CS_LowLevel_Initiation_BP_Stop_STATES
+	 CS_LowLevel_Initiation_BP_Stop_STOP : CS_LowLevel_Initiation_BP_Stop_STATES
+	 CS_LowLevel_Therapy_BP_Status_NULL : CS_LowLevel_Therapy_BP_Status_STATES
+	 CS_LowLevel_Therapy_BP_NORMAL : CS_LowLevel_Therapy_BP_Status_STATES
+	 CS_LowLevel_Therapy_BP_STOPPED : CS_LowLevel_Therapy_BP_Status_STATES
+	
+    preds
+	 partition(CS_LowLevel_Therapy_BP_Control_STATES, {RUNNING}, {PAUSE}, {CS_LowLevel_Therapy_BP_Control_NULL})
+	 partition(RUNNING_statemachine1_STATES, {S1}, {S2}, {S3}, {S4}, {S5}, {RUNNING_statemachine1_NULL})
+	 partition(CS_LowLevel_Initiation_BP_Stop_STATES, {CS_LowLevel_Initiation_BP_Stop_NORMAL}, {CS_LowLevel_Initiation_BP_Stop_STOP}, {CS_LowLevel_Initiation_BP_Stop_NULL})
+	 partition(CS_LowLevel_Therapy_BP_Status_STATES, {CS_LowLevel_Therapy_BP_NORMAL}, {CS_LowLevel_Therapy_BP_STOPPED}, {CS_LowLevel_Therapy_BP_Status_NULL})
+ end
+
+spec m915_implicitContext = m914_implicitContext = m913_implicitContext    
+	sorts 
+	 ARTERIAL_BOLUS_STATES
+	 PAUSE_statemachine1_STATES
+    ops 
+     ARTERIAL_BOLUS_NULL : ARTERIAL_BOLUS_STATES
+	 ARTERIAL_BOLUS_OFF : ARTERIAL_BOLUS_STATES
+	 ARTERIAL_BOLUS_ON : ARTERIAL_BOLUS_STATES
+	 PAUSE_statemachine1_NULL : PAUSE_statemachine1_STATES
+	 AB_START : PAUSE_statemachine1_STATES
+	 AB_RUNNING : PAUSE_statemachine1_STATES
+	 AB_FINISH : PAUSE_statemachine1_STATES
+	
+    preds
+	 partition(ARTERIAL_BOLUS_STATES, {ARTERIAL_BOLUS_OFF}, {ARTERIAL_BOLUS_ON}, {ARTERIAL_BOLUS_NULL})
+	 partition(PAUSE_statemachine1_STATES, {AB_START}, {AB_RUNNING}, {AB_FINISH}, {PAUSE_statemachine1_NULL})
+ end 
+
+spec c8-rinsing_parameters = 
+    sorts 
+    ops 
+     FILLING_BP_RATE_RANGE : 50\8229\&600
+	 RINSING_BP_RATE_RANGE : 50\8229\&300
+	 DF_FLOW_RANGE : 50\8229\&300
+	 RINSING_TIME_RANGE : 0\8229\&59
+	 UF_RINSING_RATE_RANGE : 0\8229\&3000
+	 UF_RINSING_VOLUME_RANGE : 0\8229\&2950
+	 BLOOD_FLOW_RANGE : 50\8229\&600
+	
+    preds
+	 FILLING_BP_RATE_RANGE \8800 \8709
+	 FILLING_BP_VOLUME_RANGE \8800 \8709
+	 RINSING_BP_RATE_RANGE \8800 \8709
+	 DF_FLOW_RANGE \8800 \8709
+	 RINSING_TIME_RANGE \8800 \8709
+	 UF_RINSING_RATE_RANGE \8800 \8709
+	 UF_RINSING_VOLUME_RANGE \8800 \8709
+	 BLOOD_FLOW_RANGE \8800 \8709
+end
+
+spec c7-concentrates = 
+    sorts 
+	 CONCENTRATE
+    ops
+
+    preds
+	partition(CONCENTRATE, {CONCENTRATE_NONE}, {CONCENTRATE_BICARBONATE}, {CONCENTRATE_ACETATE})
+ end 
+
+ //////
+spec c6-CFTestingSignal = c5-signals
+	sorts 
+	 SIGNAL_STATUS
+	 SIGNAL
+    ops
+ 	 CF_TESTING_SIGNAL
+    preds
+	 partition(SIGNAL_STATUS, {SIGNAL_OFF}, {SIGNAL_RED}, {SIGNAL_GREEN}, {SIGNAL_ORANGE})
+	 CF_TESTING_SIGNAL: SIGNAL ----- talk about in write up
+end
+ /////
+
+spec c5-signals = 
+    sorts 
+	 SIGNAL_STATUS 
+	 SIGNAL 
+    ops 
+    preds
+	 partition(SIGNAL_STATUS, {SIGNAL_OFF}, {SIGNAL_RED}, {SIGNAL_GREEN}, {SIGNAL_ORANGE}) 
+ end 

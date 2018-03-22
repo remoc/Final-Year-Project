@@ -1,0 +1,60 @@
+spec DATAm1 over EVT =
+ DATAm0 and m1_implicitContext
+ then 
+   ops PREPARATION_sm : PREPARATION_sm_STATES
+	INITIATION_sm : INITIATION_sm_STATES
+	ENDING_sm : ENDING_sm_STATES
+	PREPARATION_sm : PREPARATION_sm_STATES
+	INITIATION_sm : INITIATION_sm_STATES
+	ENDING_sm : ENDING_sm_STATES
+
+   preds
+	PREPARATION_sm \8800 PREPARATION_sm_NULL \8660 CS_TopLevel = PREPARATION&PREPARATION_sm' \8800 PREPARATION_sm'_NULL \8660 CS_TopLevel' = PREPARATION
+	INITIATION_sm \8800 INITIATION_sm_NULL \8660 CS_TopLevel = INITIATION&INITIATION_sm' \8800 INITIATION_sm'_NULL \8660 CS_TopLevel' = INITIATION
+	ENDING_sm \8800 ENDING_sm_NULL \8660 CS_TopLevel = ENDING&ENDING_sm' \8800 ENDING_sm'_NULL \8660 CS_TopLevel' = ENDING
+   Events 
+   INITIALISATION Ordinary = 
+	 thenAct PREPARATION_sm' = PREPARATION_sm_NULL
+	INITIATION_sm' = INITIATION_sm_NULL
+	ENDING_sm' = ENDING_sm_NULL
+end
+
+ spec r1 over EVT =
+	d1
+
+	preds
+	Events
+	Event E1 Ordinary = 
+	 refines
+	 any
+	 where s1 = n1 
+	 thenAct s1 = n2 = n3
+end
+
+spec m1 over EVT =
+ DATAm1 and
+ (m0 hide via HDSystem_Prepares -> HDSystem_StartsTestingCF,
+ HDSystem_Initiates -> HDSystem_StartsConnectingPatient, 
+ HDSystem_Ends -> HDSystem_StartsReinfusion,
+ HDSystem_StandsBy -> HDSystem_StartsStandingBy) and 
+ (r0 with d0 -> DATAm1, E1 -> HHDSystem_StartsStandingBy, s1 -> ENDING_sm, n1-> THERAPY_OVERVIEWING, n2-> ENDING_sm_NULL) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsConnectingConcentrate, s1 -> PREPARATION_sm, n1-> CF_TESTING, n2-> CONCENTRATE_CONNECTING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsSettingRP, s1 -> PREPARATION_sm, n1-> CONCENTRATE_CONNECTING, n2-> RP_SETTING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsPreparingTS, s1 -> PREPARATION_sm, n1-> RP_SETTING, n2-> TS_PREPARING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsPreparingHP, s1 -> PREPARATION_sm, n1-> TS_PREPARING, n2-> HP_PREPARING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsSettingTP, s1 -> PREPARATION_sm, n1-> HP_PREPARING, n2-> TP_SETTING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsRinsingDialyzer, s1 -> PREPARATION_sm, n1-> TP_SETTING, n2-> DIALYZER_RINSING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsTherapy, s1 -> PREPARATION_sm, n1-> PATIENT_CONNECTING, n2-> THERAPY) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsEmptyingDialyzer, s1 -> ENDING_sm, n1-> REINFUSION, n2-> DIALYZER_EMPTYING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsEmptyingCartridge, s1 -> ENDING_sm, n1-> DIALYZER_EMPTYING, n2-> CARTRIDGE_EMPTYING) and
+ (r0 with d0 -> DATAm1, E1 -> HDSystem_StartsOverviewingTherapy, s1 -> ENDING_sm, n1-> CARTRIDGE_EMPTYING, n2-> THERAPY_OVERVIEWING) and
+ (r1 with d1 -> DATAm1, E1 -> HDSystem_StartsConnectingPatient, s1 -> PREPARATION_sm, n1 -> DIALYZER_RINSING, n2 -> PREPARATION_sm_NULLINITIATION_sm, n3 -> PATIENT_CONNECTING) and 
+ (r1 with d1 -> DATAm1, E1 -> HDSystem_StartsReinfusion, s1 -> INITIATION_sm, n1 -> THERAPY, n2 -> INITIATION_sm_NULLENDING_sm, n3 -> REINFUSION)
+
+   Event HDSystem_StartsTestingCF Ordinary = 
+ 	 any 
+	 where 
+	 with 
+	 thenAct PREPARATION_sm' = CF_TESTING
+
+ end 
